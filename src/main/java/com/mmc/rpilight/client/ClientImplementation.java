@@ -40,13 +40,13 @@ public class ClientImplementation implements Client {
         Gson gson = new Gson();
         String json = gson.toJson(command);
 
-        byte[] buf = json.getBytes();
+        byte[] buf =  new byte[1024];//json.getBytes();
 
         DatagramPacket packet = new DatagramPacket( buf, buf.length, address, PORT );
 
         send(packet);
 
-        startWaiting4Response();
+        startWaiting4Response(buf);
 
     }
 
@@ -70,10 +70,10 @@ public class ClientImplementation implements Client {
         }
     }
 
-    private void startWaiting4Response(){
+    private void startWaiting4Response(final byte[] buf){
         System.out.println("ClientImplementation :: Waiting 4 response...");
 
-        byte[] buf = new byte[1024];
+
         DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
         try {
@@ -90,13 +90,13 @@ public class ClientImplementation implements Client {
     private void onRecive(DatagramPacket packet) {
         System.out.println("ClientImplementation :: Ooo! Serwer responsed!");
 
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
 
-        String json = new String(packet.getData(), 0, packet.getLength());
+//        String json = new String(packet.getData(), 0, packet.getLength());
+//
+//        Response response = gson.fromJson(json, Response.class);
 
-        Response response = gson.fromJson(json, Response.class);
-
-        onResponseListener.onRecive(response);
+       // onResponseListener.onRecive(/*response*/ null);
 
     }
 }

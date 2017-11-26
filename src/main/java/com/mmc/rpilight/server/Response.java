@@ -1,5 +1,6 @@
 package com.mmc.rpilight.server;
 
+import java.net.DatagramPacket;
 import java.net.InetAddress;
 
 /**
@@ -13,9 +14,9 @@ public class Response {
         this.address = address;
     }
 
-
-
     public InetAddress getAddress() {
         return address;
     }
+
+
 }

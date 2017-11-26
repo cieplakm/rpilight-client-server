@@ -3,6 +3,8 @@ package com.mmc.rpilight.server;
 
 import com.mmc.rpilight.OnReciveListener;
 
+import java.net.UnknownHostException;
+
 public interface Server {
 	
 	

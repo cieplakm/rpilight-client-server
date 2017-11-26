@@ -37,8 +37,9 @@ public class ServerImplementation extends Thread implements Server {
     }
 
     public void run() {
-        while (true)
-            startListening();
+       while (true)
+           startListening();
+
 
     }
 
@@ -55,7 +56,13 @@ public class ServerImplementation extends Thread implements Server {
             e.printStackTrace();
         }
 
-        onRecived(packet);
+       new Thread(new Runnable() {
+           @Override
+           public void run() {
+               onRecived(packet);
+           }
+       });
+
 
     }
 
@@ -64,17 +71,64 @@ public class ServerImplementation extends Thread implements Server {
         
         System.out.println("ServerImplementation :: O! Something recived!");
 
-        String data = new String(packet.getData(), 0, packet.getLength());
+//        String data = new String(packet.getData(), 0, packet.getLength());
+//
+//        Gson gson = new Gson();
+//
+//        Request request = gson.fromJson(data, Request.class);
+//
+//        request.setAddress(packet.getAddress());
 
-        Gson gson = new Gson();
+        //onReciveListener.onRecive(request);
 
-        Request request = gson.fromJson(data, Request.class);
+        byte[] buf = "dfasdf".getBytes();
 
-        request.setAddress(packet.getAddress());
+        InetAddress address = packet.getAddress();
+        int port = packet.getPort();
+        packet = new DatagramPacket(buf, buf.length, address, port);
+        try {
+            socket.send(packet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        onReciveListener.onRecive(request);
 
     }
+
+
+    @Override
+    public void response(Response response)  {
+        System.out.println("ServerImplementation :: Responsing ...");
+        Gson gson = new Gson();
+
+        byte[] buf = gson.toJson(response).toString().getBytes();
+
+        InetAddress address = response.getAddress();
+        System.out.println("ServerImplementation :: Responsing ..." + address.toString());
+
+
+        String d = gson.toJson(response);
+
+        buf = d.getBytes();
+
+
+
+       // InetAddress address = response.getDataPacket().getAddress();
+
+        //int port = response.getDataPacket().getPort();
+
+        DatagramPacket packet;
+        packet = new DatagramPacket(buf, buf.length, address, PORT);
+
+//
+//        DatagramPacket outputPacket = null;
+//
+//        outputPacket = new DatagramPacket(buf, buf.length, address, PORT);
+
+
+        sendPacket(packet);
+    }
+
 
 
     private void sendPacket(DatagramPacket packet) {
@@ -87,22 +141,10 @@ public class ServerImplementation extends Thread implements Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 
 
-    @Override
-    public void response(Response response) {
-        System.out.println("ServerImplementation :: Responsing ...");
-        Gson gson = new Gson();
 
-        byte[] buf = gson.toJson(response).toString().getBytes();
-
-        InetAddress address = response.getAddress();
-        System.out.println("ServerImplementation :: Responsing ..." + address.toString());
-
-        DatagramPacket outputPacket = new DatagramPacket(buf, buf.length, address, PORT);
-
-        sendPacket(outputPacket);
-    }
 }
