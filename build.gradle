@@ -1,8 +1,13 @@
 apply plugin: 'java'
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+repositories {
+    jcenter()
 }
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
+dependencies {
+    compile 'com.google.code.gson:gson:2.8.2'
+}
+
+
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
