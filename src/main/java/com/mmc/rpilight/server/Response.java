@@ -9,14 +9,26 @@ import java.net.InetAddress;
 
 public class Response {
     private transient InetAddress address;
+    private transient int port;
+    private String msg;
 
-    public void setAddress(InetAddress address) {
-        this.address = address;
+    public Response(Request request) {
+        port = request.getPort();
+        address = request.getAddress();
+    }
+
+    public String getMessage() {
+        return msg;
     }
 
     public InetAddress getAddress() {
         return address;
     }
+    public int getPort() {
+        return port;
+    }
 
-
+    public void setMessage(String message) {
+        this.msg = message;
+    }
 }

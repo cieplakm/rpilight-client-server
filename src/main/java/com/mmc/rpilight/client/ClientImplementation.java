@@ -3,11 +3,9 @@ package com.mmc.rpilight.client; /**
  */
 
 import com.google.gson.Gson;
-import com.mmc.rpilight.OnReciveListener;
 import com.mmc.rpilight.OnResponseListener;
 import com.mmc.rpilight.server.Request;
 import com.mmc.rpilight.server.Response;
-import com.mmc.rpilight.server.Server;
 
 import java.io.*;
 import java.net.*;
@@ -40,7 +38,7 @@ public class ClientImplementation implements Client {
         Gson gson = new Gson();
         String json = gson.toJson(command);
 
-        byte[] buf =  new byte[1024];//json.getBytes();
+        byte[] buf = json.getBytes();
 
         DatagramPacket packet = new DatagramPacket( buf, buf.length, address, PORT );
 
@@ -90,13 +88,13 @@ public class ClientImplementation implements Client {
     private void onRecive(DatagramPacket packet) {
         System.out.println("ClientImplementation :: Ooo! Serwer responsed!");
 
-        //Gson gson = new Gson();
+        Gson gson = new Gson();
 
-//        String json = new String(packet.getData(), 0, packet.getLength());
-//
-//        Response response = gson.fromJson(json, Response.class);
+        String json = new String(packet.getData(), 0, packet.getLength());
 
-       // onResponseListener.onRecive(/*response*/ null);
+        Response response = gson.fromJson(json, Response.class);
+
+        onResponseListener.onRecive(response);
 
     }
 }
