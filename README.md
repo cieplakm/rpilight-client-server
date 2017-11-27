@@ -5,14 +5,12 @@ Simple lib to create Server and Client communication
 
 ### Using
 
-How to use:
-
 ```
 public class RPiServerAndClient {
 
     public static void main(String[] args){
-
-        Server server = new ServerImplementation();
+		//server site
+        Server server = RPiLight.serverInstance();
 
         server.setOnRequestListener(new OnRequestListener() {
             @Override
@@ -38,12 +36,12 @@ public class RPiServerAndClient {
 
         server.start();
 
-        
+        //client site
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                Client client = new ClientImplementation("localhost");
+                Client client = RPiLight.clientInstance("localhost");
 
                 client.setOnReciveListener(new OnResponseListener() {
                     @Override

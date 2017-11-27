@@ -8,6 +8,12 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
 }
 
-
+sourceSets {
+    main {
+        java {
+            include 'com/mmc/rpilight/**' // only this package to JAR!
+        }
+    }
+}
 
 

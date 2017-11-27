@@ -1,5 +1,8 @@
-package com.mmc.rpilight;
+package example;
 
+import com.mmc.rpilight.OnRequestListener;
+import com.mmc.rpilight.OnResponseListener;
+import com.mmc.rpilight.RPiLight;
 import com.mmc.rpilight.client.Client;
 import com.mmc.rpilight.client.ClientImplementation;
 import com.mmc.rpilight.server.Request;
@@ -15,7 +18,7 @@ public class RPiServer {
 
     public static void main(String[] args){
 
-        Server server = new ServerImplementation();
+        Server server = RPiLight.serverInstance();
 
         server.setOnRequestListener(new OnRequestListener() {
             @Override
@@ -46,7 +49,7 @@ public class RPiServer {
             @Override
             public void run() {
 
-                Client client = new ClientImplementation("localhost");
+                Client client = RPiLight.clientInstance("localhost");
 
                 client.setOnReciveListener(new OnResponseListener() {
                     @Override
