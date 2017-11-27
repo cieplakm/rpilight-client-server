@@ -18,31 +18,7 @@ public class RPiServer {
 
     public static void main(String[] args){
 
-        Server server = RPiLight.serverInstance();
 
-        server.setOnRequestListener(new OnRequestListener() {
-            @Override
-            public void onRequest(Request request) {
-
-                System.out.println(request.getTypeDescription());
-
-                Response response = new Response(request);
-
-                if (request.isAction()){
-                    // do operation with lamp
-                    // and response
-                   response.setLampOn(request.shouldOn());
-                }else {
-                    //return lamp state
-                    response.setLampOn(true);
-                }
-
-                server.response(response);
-
-            }
-        });
-
-        server.start();
 
 
         new Thread(new Runnable() {

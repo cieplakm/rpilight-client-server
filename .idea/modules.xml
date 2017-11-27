@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/rpilight-communication-lib.iml" filepath="$PROJECT_DIR$/.idea/modules/rpilight-communication-lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/rpilight-client-server.iml" filepath="$PROJECT_DIR$/.idea/modules/rpilight-client-server.iml" />
     </modules>
   </component>
 </project>

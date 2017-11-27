@@ -41,7 +41,7 @@ public class ServerImplementation extends Thread implements Server {
         System.out.println("ServerImplementation :: I am ready for connect client");
 
         byte[] buf = new byte[1024];
-        DatagramPacket packet = new DatagramPacket(buf, buf.length);
+        final DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
         try {
             socket.receive(packet);
