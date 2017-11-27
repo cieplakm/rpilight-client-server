@@ -9,15 +9,19 @@ import java.net.InetAddress;
 public class Response {
     private transient InetAddress address;
     private transient int port;
-    private String msg;
+
+    private boolean isLampOn;
 
     public Response(Request request) {
         port = request.getPort();
         address = request.getAddress();
     }
 
-    public String getMessage() {
-        return msg;
+    public void setLampOn(boolean lampOn) {
+        isLampOn = lampOn;
+    }
+    public boolean isLampOn() {
+        return isLampOn;
     }
 
     public InetAddress getAddress() {
@@ -27,7 +31,7 @@ public class Response {
         return port;
     }
 
-    public void setMessage(String message) {
-        this.msg = message;
-    }
+
+
+
 }

@@ -9,6 +9,9 @@ public class Request {
     private static final int ACTION = 1;
 
     private int type;
+
+
+
     private boolean swithOn;
 
     private transient  InetAddress address;
@@ -25,6 +28,11 @@ public class Request {
     public Request(boolean swithOn){
         this(ACTION);
         this.swithOn = swithOn;
+    }
+
+
+    public boolean shouldOn() {
+        return swithOn;
     }
 
 
@@ -55,5 +63,9 @@ public class Request {
             return "This is Ask about state!";
         }
         return "Unknown request";
+    }
+
+    public boolean isAction() {
+        return type == ACTION;
     }
 }

@@ -1,17 +1,16 @@
-package com.mmc.rpilight;
+# rpi-light-communication-lib
+One Paragraph of project description goes here
 
-import com.mmc.rpilight.client.Client;
-import com.mmc.rpilight.client.ClientImplementation;
-import com.mmc.rpilight.server.Request;
-import com.mmc.rpilight.server.Response;
-import com.mmc.rpilight.server.Server;
-import com.mmc.rpilight.server.ServerImplementation;
+## Getting Started
 
-/**
- * Created by Moni on 2017-11-26.
- */
+Lib to comuunicate RaspberryPi and Client
 
-public class RPiServer {
+### Using
+
+How to use:
+
+```
+public class RPiServerAndClient {
 
     public static void main(String[] args){
 
@@ -41,7 +40,7 @@ public class RPiServer {
 
         server.start();
 
-
+        
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -69,3 +68,5 @@ public class RPiServer {
         }).start();
     }
 }
+```
+
