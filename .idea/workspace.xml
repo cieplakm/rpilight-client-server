@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="00551835-220a-4d80-8afd-d3488fcb42cb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmc/rpilight/RPiServer.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmc/rpilight/RPiServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmc/rpilight/server/Request.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmc/rpilight/server/Request.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mmc/rpilight/server/Response.java" afterPath="$PROJECT_DIR$/src/main/java/com/mmc/rpilight/server/Response.java" />
-    </list>
+    <list default="true" id="00551835-220a-4d80-8afd-d3488fcb42cb" name="Default" comment="" />
     <ignored path="rpilight-client-server.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -101,8 +97,8 @@
       <file leaf-file-name="RPiServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mmc/rpilight/RPiServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="70" selection-end-column="1" />
+            <state relative-caret-position="183">
+              <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1583,8 +1579,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mmc/rpilight/RPiServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="70" selection-end-column="1" />
+        <state relative-caret-position="183">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

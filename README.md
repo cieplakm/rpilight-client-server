@@ -1,9 +1,7 @@
 # rpi-light-communication-lib
-One Paragraph of project description goes here
 
-## Getting Started
+Simple lib to create Server and Client communication
 
-Lib to comuunicate RaspberryPi and Client
 
 ### Using
 
