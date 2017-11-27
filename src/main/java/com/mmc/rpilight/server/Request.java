@@ -5,8 +5,29 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 
 public class Request {
-    public String cmd;
+    private static final int INFO = 0;
+    private static final int ACTION = 1;
+
+    private int type;
+    private boolean swithOn;
+
     private transient  InetAddress address;
+
+
+    private Request(int type) {
+        this.type = type;
+    }
+
+    public Request(){
+        this(INFO);
+    }
+
+    public Request(boolean swithOn){
+        this(ACTION);
+        this.swithOn = swithOn;
+    }
+
+
 
     public int getPort() {
         return port;
@@ -25,5 +46,14 @@ public class Request {
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    public String  getTypeDescription(){
+        if (type == ACTION){
+            return "This is Action!";
+        }else if (type==INFO){
+            return "This is Ask about state!";
+        }
+        return "Unknown request";
     }
 }

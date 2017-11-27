@@ -33,7 +33,7 @@ public class ClientImplementation implements Client {
     }
 
     @Override
-    public void request(Request command){
+    public void request(Request command) {
 
         Gson gson = new Gson();
         String json = gson.toJson(command);
@@ -44,19 +44,13 @@ public class ClientImplementation implements Client {
 
         send(packet);
 
-        startWaiting4Response(buf);
+        wait4Response();
 
     }
 
     @Override
     public void setOnReciveListener(OnResponseListener onResponseListener) {
-
         this.onResponseListener = onResponseListener;
-    }
-
-
-    public void close(){
-        socket.close();
     }
 
     private void send(DatagramPacket packet){
@@ -68,10 +62,10 @@ public class ClientImplementation implements Client {
         }
     }
 
-    private void startWaiting4Response(final byte[] buf){
+    private void wait4Response(){
         System.out.println("ClientImplementation :: Waiting 4 response...");
 
-
+        byte[] buf = new byte[1024];
         DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
         try {
@@ -81,7 +75,6 @@ public class ClientImplementation implements Client {
         }
 
         onRecive(packet);
-
 
     }
 
@@ -94,7 +87,11 @@ public class ClientImplementation implements Client {
 
         Response response = gson.fromJson(json, Response.class);
 
-        onResponseListener.onRecive(response);
+        onResponseListener.onResponse(response);
 
+    }
+
+    public void close(){
+        socket.close();
     }
 }

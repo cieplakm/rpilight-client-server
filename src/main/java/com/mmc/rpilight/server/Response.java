@@ -1,6 +1,5 @@
 package com.mmc.rpilight.server;
 
-import java.net.DatagramPacket;
 import java.net.InetAddress;
 
 /**

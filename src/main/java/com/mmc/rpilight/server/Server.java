@@ -1,9 +1,7 @@
 package com.mmc.rpilight.server;
 
 
-import com.mmc.rpilight.OnReciveListener;
-
-import java.net.UnknownHostException;
+import com.mmc.rpilight.OnRequestListener;
 
 public interface Server {
 	
@@ -16,6 +14,6 @@ public interface Server {
 
     void response(Response response);
 
-    void setOnReciveListener(OnReciveListener onReciveListener);
+    void setOnRequestListener(OnRequestListener onRequestListener);
 
 }

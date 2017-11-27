@@ -4,23 +4,19 @@ package com.mmc.rpilight.server; /**
 
 import com.google.gson.Gson;
 import com.mmc.rpilight.Config;
-import com.mmc.rpilight.OnReciveListener;
+import com.mmc.rpilight.OnRequestListener;
 
 import java.io.*;
 import java.net.*;
-
-import static com.mmc.rpilight.Config.PORT;
 
 
 public class ServerImplementation extends Thread implements Server {
 
     protected DatagramSocket socket = null;
-    private OnReciveListener onReciveListener;
+    private OnRequestListener onRequestListener;
 
 
     public ServerImplementation()  {
-
-
 
         try {
             socket = new DatagramSocket(Config.PORT);
@@ -31,16 +27,13 @@ public class ServerImplementation extends Thread implements Server {
 
     }
 
-    @Override
-    public void setOnReciveListener(OnReciveListener onReciveListener){
-        this.onReciveListener = onReciveListener;
+    public void setOnRequestListener(OnRequestListener onRequestListener){
+        this.onRequestListener = onRequestListener;
     }
 
     public void run() {
        while (true)
            startListening();
-
-
     }
 
 
@@ -63,7 +56,6 @@ public class ServerImplementation extends Thread implements Server {
            }
        }).start();
 
-
     }
 
 
@@ -79,7 +71,7 @@ public class ServerImplementation extends Thread implements Server {
         request.setAddress(packet.getAddress());
         request.setPort(packet.getPort());
 
-        onReciveListener.onRecive(request);
+        onRequestListener.onRequest(request);
 
     }
 
@@ -119,8 +111,5 @@ public class ServerImplementation extends Thread implements Server {
         }
 
     }
-
-
-
 
 }
