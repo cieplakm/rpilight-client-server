@@ -25,7 +25,7 @@ public class RPiServer {
             @Override
             public void run() {
 
-                Client client = RPiLight.clientInstance("localhost");
+                Client client = RPiLight.clientInstance("192.168.1.15");
 
                 client.setOnReciveListener(new OnResponseListener() {
                     @Override
