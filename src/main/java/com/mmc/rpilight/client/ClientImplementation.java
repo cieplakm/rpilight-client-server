@@ -3,6 +3,7 @@ package com.mmc.rpilight.client; /**
  */
 
 import com.google.gson.Gson;
+import com.mmc.rpilight.Config;
 import com.mmc.rpilight.OnResponseListener;
 import com.mmc.rpilight.server.Request;
 import com.mmc.rpilight.server.Response;
@@ -10,15 +11,15 @@ import com.mmc.rpilight.server.Response;
 import java.io.*;
 import java.net.*;
 
-import static com.mmc.rpilight.Config.PORT;
-
 public class ClientImplementation implements Client {
 
     private InetAddress address;
     private DatagramSocket socket = null;
     private OnResponseListener onResponseListener;
+    private Config config;
 
-    public ClientImplementation(String addressStr) {
+    public ClientImplementation(Config config) {
+        this.config = config;
         try {
             socket = new DatagramSocket();
         } catch (SocketException e) {
@@ -26,7 +27,7 @@ public class ClientImplementation implements Client {
         }
 
         try {
-            address = InetAddress.getByName(addressStr);
+            address = InetAddress.getByName(this.config.getIP());
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -40,7 +41,7 @@ public class ClientImplementation implements Client {
 
         byte[] buf = json.getBytes();
 
-        DatagramPacket packet = new DatagramPacket( buf, buf.length, address, PORT );
+        DatagramPacket packet = new DatagramPacket( buf, buf.length, address, this.config.getPort() );
 
         send(packet);
 
@@ -94,4 +95,7 @@ public class ClientImplementation implements Client {
     public void close(){
         socket.close();
     }
+
+
+
 }

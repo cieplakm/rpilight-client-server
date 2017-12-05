@@ -1,10 +1,7 @@
 package example;
 
-import com.mmc.rpilight.OnRequestListener;
 import com.mmc.rpilight.OnResponseListener;
-import com.mmc.rpilight.RPiLight;
 import com.mmc.rpilight.client.Client;
-import com.mmc.rpilight.client.ClientImplementation;
 import com.mmc.rpilight.server.Request;
 import com.mmc.rpilight.server.Response;
 import com.mmc.rpilight.server.Server;
@@ -18,14 +15,24 @@ public class RPiServer {
 
     public static void main(String[] args){
 
+        Server server = new Server.Builder()
+                .setPort(8080)
+                .build();
 
+        server.start();
 
 
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                Client client = RPiLight.clientInstance("192.168.1.15");
+
+
+            while(true){
+                Client client = new Client.Builder()
+                        .setIP("localhost")
+                        .setPort(8080)
+                        .build();
 
                 client.setOnReciveListener(new OnResponseListener() {
                     @Override
@@ -38,13 +45,18 @@ public class RPiServer {
                 client.request(new Request(false)); //request to change state
                 client.request(new Request());
 
-               try {
-                   Thread.sleep(5000);
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               }
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
             }
         }).start();
+
+
+
+
     }
 }

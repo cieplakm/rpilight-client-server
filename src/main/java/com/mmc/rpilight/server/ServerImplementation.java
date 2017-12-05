@@ -16,10 +16,10 @@ public class ServerImplementation extends Thread implements Server {
     private OnRequestListener onRequestListener;
 
 
-    public ServerImplementation()  {
+    public ServerImplementation(Config config)  {
 
         try {
-            socket = new DatagramSocket(Config.PORT);
+            socket = new DatagramSocket(config.getPort());
         } catch (SocketException e) {
             e.printStackTrace();
 
@@ -33,11 +33,11 @@ public class ServerImplementation extends Thread implements Server {
 
     public void run() {
        while (true)
-           startListening();
+           listening();
     }
 
 
-    private void startListening() {
+    private void listening() {
         System.out.println("ServerImplementation :: I am ready for connect client");
 
         byte[] buf = new byte[1024];
@@ -71,7 +71,8 @@ public class ServerImplementation extends Thread implements Server {
         request.setAddress(packet.getAddress());
         request.setPort(packet.getPort());
 
-        onRequestListener.onRequest(request);
+        if (onRequestListener != null)
+            onRequestListener.onRequest(request);
 
     }
 
