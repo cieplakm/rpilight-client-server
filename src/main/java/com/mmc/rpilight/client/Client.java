@@ -1,7 +1,9 @@
 package com.mmc.rpilight.client;
 
+import com.google.gson.Gson;
 import com.mmc.rpilight.Config;
 import com.mmc.rpilight.OnResponseListener;
+import com.mmc.rpilight.serialization.JSONAdapter;
 import com.mmc.rpilight.server.Request;
 
 public interface Client {
@@ -35,7 +37,7 @@ public interface Client {
                 public int getPort() {
                     return port;
                 }
-            });
+            }, new JSONAdapter(new Gson()));
         }
     }
 }

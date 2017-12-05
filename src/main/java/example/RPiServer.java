@@ -41,8 +41,9 @@ public class RPiServer {
                     }
                 });
 
+                client.request(new Request(true)); //request to change state
                 client.request(new Request()); //request to get info
-                client.request(new Request(false)); //request to change state
+
                 client.request(new Request());
 
                 try {

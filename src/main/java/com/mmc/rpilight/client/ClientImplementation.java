@@ -1,9 +1,7 @@
-package com.mmc.rpilight.client; /**
- * Created by mcieplak on 2017-11-24.
- */
+package com.mmc.rpilight.client;
 
-import com.google.gson.Gson;
 import com.mmc.rpilight.Config;
+import com.mmc.rpilight.serialization.JSON2Object;
 import com.mmc.rpilight.OnResponseListener;
 import com.mmc.rpilight.server.Request;
 import com.mmc.rpilight.server.Response;
@@ -17,9 +15,12 @@ public class ClientImplementation implements Client {
     private DatagramSocket socket = null;
     private OnResponseListener onResponseListener;
     private Config config;
+    private JSON2Object json2Object;
 
-    public ClientImplementation(Config config) {
+    public ClientImplementation(Config config, JSON2Object json2Object) {
         this.config = config;
+        this.json2Object = json2Object;
+
         try {
             socket = new DatagramSocket();
         } catch (SocketException e) {
@@ -36,8 +37,7 @@ public class ClientImplementation implements Client {
     @Override
     public void request(Request command) {
 
-        Gson gson = new Gson();
-        String json = gson.toJson(command);
+        String json = json2Object.getJson(command);
 
         byte[] buf = json.getBytes();
 
@@ -82,11 +82,9 @@ public class ClientImplementation implements Client {
     private void onRecive(DatagramPacket packet) {
         System.out.println("ClientImplementation :: Ooo! Serwer responsed!");
 
-        Gson gson = new Gson();
-
         String json = new String(packet.getData(), 0, packet.getLength());
 
-        Response response = gson.fromJson(json, Response.class);
+        Response response = json2Object.getObject(json, Response.class);
 
         onResponseListener.onResponse(response);
 

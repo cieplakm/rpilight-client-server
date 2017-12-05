@@ -1,9 +1,7 @@
-package com.mmc.rpilight.server; /**
- * Created by mcieplak on 2017-11-24.
- */
+package com.mmc.rpilight.server;
 
-import com.google.gson.Gson;
 import com.mmc.rpilight.Config;
+import com.mmc.rpilight.serialization.JSON2Object;
 import com.mmc.rpilight.OnRequestListener;
 
 import java.io.*;
@@ -14,9 +12,11 @@ public class ServerImplementation extends Thread implements Server {
 
     protected DatagramSocket socket = null;
     private OnRequestListener onRequestListener;
+    private JSON2Object json2Object;
 
 
-    public ServerImplementation(Config config)  {
+    public ServerImplementation(Config config, JSON2Object json2Object)  {
+        this.json2Object = json2Object;
 
         try {
             socket = new DatagramSocket(config.getPort());
@@ -64,9 +64,8 @@ public class ServerImplementation extends Thread implements Server {
 
         String data = new String(packet.getData(), 0, packet.getLength());
 
-        Gson gson = new Gson();
 
-        Request request = gson.fromJson(data, Request.class);
+        Request request = json2Object.getObject(data, Request.class);
 
         request.setAddress(packet.getAddress());
         request.setPort(packet.getPort());
@@ -86,8 +85,8 @@ public class ServerImplementation extends Thread implements Server {
         int port = response.getPort();
 
 
-        Gson gson = new Gson();
-        String json = gson.toJson(response);
+
+        String json = json2Object.getJson(response);
 
         byte[] buf = json.getBytes();
 
